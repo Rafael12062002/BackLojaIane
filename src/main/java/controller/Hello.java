@@ -1,4 +1,4 @@
-package com.loja.BackLoja.controller;
+package controller;
 
 import java.util.Date;
 
