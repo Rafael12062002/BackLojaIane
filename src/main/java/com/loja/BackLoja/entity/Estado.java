@@ -1,4 +1,4 @@
-package entity;
+package com.loja.BackLoja.entity;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 public class Estado {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String nome;
