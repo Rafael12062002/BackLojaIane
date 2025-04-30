@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.loja.BackLoja.entity.Cidade;
-import com.loja.BackLoja.service.CidadeService;
+import com.loja.BackLoja.entity.Categoria;
+import com.loja.BackLoja.service.CategoriaService;
 
 @RestController
-@RequestMapping("/api/cidade")
-public class CidadeController {
+@RequestMapping("/api/categoria")
+public class CategoriaController {
 
 	@Autowired
-	private CidadeService cidadeService;
+	private CategoriaService categoriaService;
 	
 	@GetMapping("/")
-	public List<Cidade> buscarTodas()
+	public List<Categoria> buscarTodos()
 	{
-		return cidadeService.buscarTodas();
+		return categoriaService.buscarTodos();
 	}
 	
 	@PostMapping("/")
-	public Cidade inserir(@RequestBody Cidade cidade)
+	public Categoria inserir(@RequestBody Categoria categoria)
 	{
-		return cidadeService.inserir(cidade);
+		return categoriaService.inserir(categoria);
 	}
 	
 	@PutMapping("/")
-	public Cidade atualizar(@RequestBody Cidade cidade)
+	public Categoria alterar(@RequestBody Categoria categoria)
 	{
-		return cidadeService.alterar(cidade);
+		return categoriaService.alterar(categoria);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long id)
 	{
-		cidadeService.excluir(id);
+		categoriaService.excluir(id);
 		return ResponseEntity.ok().build();
 	}
 }

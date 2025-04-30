@@ -32,6 +32,11 @@ public class Cidade {
 	private Date dataCriacao;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAtualizacao;
+	
+	public Cidade()
+	{
+		
+	}
 	public Cidade(Long id, String nome, Estado estado, Date dataCriacao, Date dataAtualizacao) {
 		super();
 		this.id = id;

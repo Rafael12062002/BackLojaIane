@@ -12,33 +12,34 @@ import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "categoria")
 @Data
-public class Estado {
+public class Categoria {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String nome;
-	private String sigla;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAtualizacao;
 	
-	public Estado()
+	public Categoria()
 	{
 		
 	}
 	
-	public Estado(Long id, String nome, String sigla, Date dataCriacao, Date dataAtualizacao) {
+	public Categoria(Long id, String nome, Date dataCriacao, Date dataAtualizacao)
+	{
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.sigla = sigla;
 		this.dataCriacao = dataCriacao;
 		this.dataAtualizacao = dataAtualizacao;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,12 +51,6 @@ public class Estado {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public String getSigla() {
-		return sigla;
-	}
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
 	}
 	public Date getDataCriacao() {
 		return dataCriacao;
@@ -69,4 +64,5 @@ public class Estado {
 	public void setDataAtualizacao(Date dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
+	
 }
