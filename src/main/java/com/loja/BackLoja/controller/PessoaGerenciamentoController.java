@@ -18,7 +18,7 @@ public class PessoaGerenciamentoController {
 	@Autowired
 	private PessoaGerenciamentoService pessoaGerenciamentoService;
 	
-	@PostMapping("/codigo")
+	@PostMapping("/senha-codigo")
 	public String recuperarCodigo(@RequestBody Pessoa pessoa)
 	{
 		return pessoaGerenciamentoService.solicitarCodigo(pessoa.getEmail());

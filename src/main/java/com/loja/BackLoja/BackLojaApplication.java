@@ -10,7 +10,7 @@ public class BackLojaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackLojaApplication.class, args);
-		System.out.println("teste");
+		System.out.println("Servidor rodando...");
 	}
 
 }
