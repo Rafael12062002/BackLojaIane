@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.loja.BackLoja.entity.Pessoa;
@@ -18,6 +19,9 @@ public class PessoaGerenciamentoService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	PasswordEncoder encoder;
 	
 	public String solicitarCodigo(String email)
 	{
@@ -37,7 +41,7 @@ public class PessoaGerenciamentoService {
 		if(diferenca.getTime()/1000 < 900)
 		{
 			//adicionar spring security
-			pessoaBanco.setSenha(pessoa.getSenha());
+			pessoaBanco.setSenha(encoder.encode(pessoa.getSenha()));
 			pessoaBanco.setCodigoSenha(null);
 			pessoaRepository.saveAndFlush(pessoaBanco);
 			return "Senha alterada com sucesso";

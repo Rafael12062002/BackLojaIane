@@ -31,12 +31,29 @@
 	</properties>
 	<dependencies>
 	
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
-		<dependency>
-    	<groupId>io.jsonwebtoken</groupId>
-    	<artifactId>jjwt</artifactId>
-    	<version>0.12.6</version>
-		</dependency>
+		<!-- API principal do jjwt -->
+	<dependency>
+  	<groupId>io.jsonwebtoken</groupId>
+  	<artifactId>jjwt-api</artifactId>
+  	<version>0.12.6</version>
+	</dependency>
+
+	<!-- Implementação necessária em tempo de execução -->
+	<dependency>
+  	<groupId>io.jsonwebtoken</groupId>
+  	<artifactId>jjwt-impl</artifactId>
+  	<version>0.12.6</version>
+  	<scope>runtime</scope>
+	</dependency>
+
+	<!-- Dependência de serialização (Jackson ou Gson) -->
+	<dependency>
+  	<groupId>io.jsonwebtoken</groupId>
+  	<artifactId>jjwt-jackson</artifactId>
+  	<version>0.12.6</version>
+  	<scope>runtime</scope>
+	</dependency>
+
 
 		<dependency>
 		<groupId>org.springframework.boot</groupId>

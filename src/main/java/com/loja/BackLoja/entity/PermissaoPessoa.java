@@ -2,6 +2,8 @@ package com.loja.BackLoja.entity;
 
 import java.util.Date;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +16,12 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "permissao_pessoa")
-public class PermissaoPessoa {
+public class PermissaoPessoa implements GrantedAuthority{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,6 +82,11 @@ public class PermissaoPessoa {
 	}
 	public void setDataAtualizacao(Date dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
+	}
+
+	@Override
+	public String getAuthority() {
+		return permissao.getNome();
 	}
 	
 }
