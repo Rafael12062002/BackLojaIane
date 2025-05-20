@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.loja.BackLoja.entity.Pessoa;
 import com.loja.BackLoja.repository.PessoaRepository;
+import com.loja.BackLoja.security.JwtUtil;
 
 @Service
 public class PessoaGerenciamentoService {

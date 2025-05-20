@@ -12,11 +12,12 @@ import com.loja.BackLoja.entity.Pessoa;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class JwtUtil {
 
-	private String chaveSecreta = "sua-chave-super-secreta-de-256-bits";
+	private String chaveSecreta = "uD83DybX91Q!7eGq63YjRzN*8vNmzPLWxTBk3Jzq5KyhWTkE7rW4Ud7KrHF9zrL4U";
 	private int validadeToken = 900000;
 	SecretKey key = Keys.hmacShaKeyFor(chaveSecreta.getBytes());
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
@@ -31,7 +32,12 @@ public class JwtUtil {
 				.compact();
 	}
 	
-	public boolean validarToken(String token)
+	public String getEmailToken(String token)
+	{
+		return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getBody().getSubject();
+	}
+	
+	public boolean validarToken(String token, HttpServletRequest request)
 	{
 		try
 		{
