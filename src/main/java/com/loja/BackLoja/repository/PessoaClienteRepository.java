@@ -6,4 +6,5 @@ import com.loja.BackLoja.entity.Pessoa;
 
 public interface PessoaClienteRepository extends JpaRepository<Pessoa, Long>{
 
+	Pessoa findByEmail(String email);
 }

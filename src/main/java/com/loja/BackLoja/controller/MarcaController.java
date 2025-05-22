@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,18 +30,21 @@ public class MarcaController {
 		return marcaService.buscarTodos();
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@PostMapping("/")
 	public Marca inserir(@RequestBody Marca marca)
 	{
 		return marcaService.inserir(marca);
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@PutMapping("/")
 	public Marca alterar(@RequestBody Marca marca)
 	{
 		return marcaService.alterar(marca);
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long id)
 	{

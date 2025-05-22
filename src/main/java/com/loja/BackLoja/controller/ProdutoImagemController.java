@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,18 +32,21 @@ public class ProdutoImagemController {
 		return produtoImagemService.buscarTodos();
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@PostMapping("/")
 	public ProdutoImagem inserir(@RequestParam("idProduto") Long idProduto, @RequestParam("file") MultipartFile file)
 	{
 		return produtoImagemService.inserir(idProduto, file);
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@PutMapping("/")
 	public ProdutoImagem alterar(@RequestBody ProdutoImagem produtoImagem)
 	{
 		return produtoImagemService.alterar(produtoImagem);
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long id)
 	{

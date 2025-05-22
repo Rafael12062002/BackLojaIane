@@ -1,11 +1,15 @@
 package com.loja.BackLoja.security;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.loja.BackLoja.entity.Pessoa;
@@ -24,7 +28,13 @@ public class JwtUtil {
 	
 	public String gerarTokenUserName(Pessoa pessoa)
 	{
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("roles",  pessoa.getAuthorities().stream()
+				.map(GrantedAuthority::getAuthority)
+				.collect(Collectors.toList()));
+		
 		return Jwts.builder()
+				.claims(claims)
 				.subject(pessoa.getUsername())
 				.issuedAt(new Date())
 				.expiration(new Date(System.currentTimeMillis() + validadeToken))

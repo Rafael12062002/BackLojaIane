@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +24,14 @@ public class PessoaController {
 	@Autowired
 	private PessoaService pessoaService;
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@GetMapping("/")
 	public List<Pessoa> buscarTodos()
 	{
 		return pessoaService.buscarTodas();
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@PostMapping("/")
 	public Pessoa inserir(@RequestBody Pessoa pessoa)
 	{
@@ -36,12 +39,14 @@ public class PessoaController {
 		return pessoaService.inserir(pessoa);
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@PutMapping("/")
 	public Pessoa alterar(@RequestBody Pessoa pessoa)
 	{
 		return pessoaService.alterar(pessoa);
 	}
 	
+	@PreAuthorize("hasRole('FUNCIONARIO')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long id)
 	{

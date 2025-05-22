@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.loja.BackLoja.entity.Permissao;
 import com.loja.BackLoja.entity.PermissaoPessoa;
 import com.loja.BackLoja.entity.Pessoa;
+import com.loja.BackLoja.enumerator.Role;
 import com.loja.BackLoja.repository.PermissaoPessoaRepository;
 import com.loja.BackLoja.repository.PermissaoRepository;
 
@@ -21,19 +22,22 @@ public class PermissaoPessoaService {
 	@Autowired
 	private PermissaoRepository permissaoRepository;
 	
-	public void vincularPessoaPermissaoCliente(Pessoa pessoa)
+	public void vincularPessoaPermissaoCliente(Pessoa pessoa, String nomePermissao)
 	{
 		System.out.println("Dentro de vincularPessoaService");
-		List<Permissao> listaPermissao = permissaoRepository.findByNome("cliente");
-		if(listaPermissao.size() > 0)
+		List<Permissao> listaPermissao = permissaoRepository.findByNome(nomePermissao);
+		if(!listaPermissao.isEmpty())
 		{
-			System.out.println("Começo do método");
 			PermissaoPessoa permissaoPessoa = new PermissaoPessoa();
 			permissaoPessoa.setPessoa(pessoa);
 			permissaoPessoa.setPermissao(listaPermissao.get(0));
 			permissaoPessoa.setDataCriacao(new Date());
+			
 			permissaoPessoaRepository.saveAndFlush(permissaoPessoa);
-			System.out.println("Fim do método");
+		}
+		else
+		{
+			System.out.println("Permissão ROLE_CLIENTE não encontrada no banco!");
 		}
 	}
 }
