@@ -1,26 +1,23 @@
 package com.loja.BackLoja.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.tomcat.util.buf.UEncoder.SafeCharsSet;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.loja.BackLoja.enumerator.Role;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -45,7 +42,7 @@ public class Pessoa implements UserDetails{
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "idCidade")
+	@JoinColumn(name = "id_cidade")
 	private Cidade cidade;
 	
 	private String nome;
@@ -61,6 +58,9 @@ public class Pessoa implements UserDetails{
 	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@Setter(value = AccessLevel.NONE)
 	private List<PermissaoPessoa> permissaoPessoas;
+	
+	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<CarrinhoCompra> carrinhos = new ArrayList<>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;

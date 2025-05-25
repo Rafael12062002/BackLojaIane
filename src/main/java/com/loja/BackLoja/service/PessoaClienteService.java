@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.loja.BackLoja.dto.LoginRequestDto;
 import com.loja.BackLoja.dto.PessoaClienteRequestDto;
+import com.loja.BackLoja.dto.TokenRefreshResponseDTO;
 import com.loja.BackLoja.entity.Pessoa;
 import com.loja.BackLoja.repository.PessoaClienteRepository;
 import com.loja.BackLoja.security.JwtUtil;
@@ -83,7 +84,8 @@ public class PessoaClienteService {
 		SecurityContextHolder.getContext().setAuthentication(login);
 		Pessoa logado = pessoaRepository.findByEmail(loginRequestDto.getEmail());
 		String token = util.gerarTokenUserName(logado);
-		return ResponseEntity.ok(token);
+		String refreshToken = util.gerarTokenUserName(logado);
+		return ResponseEntity.ok(new TokenRefreshResponseDTO(token, refreshToken));
 		
 		//Authentication auth2 = auth.authenticate(new UsernamePasswordAuthenticationToken(pessoa.getEmail(), pessoa.getSenha()));
 		//SecurityContextHolder.getContext().setAuthentication(auth2);

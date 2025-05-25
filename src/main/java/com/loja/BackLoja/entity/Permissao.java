@@ -32,9 +32,9 @@ public class Permissao {
 	private Date dataAtualizacao;
 	
 	@ManyToMany
-	@JoinTable(name = "pessoa_permissao", 
-	           joinColumns = @JoinColumn(name = "permissao_id"),
-	           inverseJoinColumns = @JoinColumn(name = "pessoa_id"))
+	@JoinTable(name = "permissao_pessoa", 
+	           joinColumns = @JoinColumn(name = "id_permissao"),
+	           inverseJoinColumns = @JoinColumn(name = "id_pessoa"))
 	private List<Pessoa> pessoas;
 	
 	public Permissao()

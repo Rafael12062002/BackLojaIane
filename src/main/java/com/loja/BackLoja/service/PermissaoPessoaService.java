@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.loja.BackLoja.entity.Permissao;
 import com.loja.BackLoja.entity.PermissaoPessoa;
 import com.loja.BackLoja.entity.Pessoa;
-import com.loja.BackLoja.enumerator.Role;
 import com.loja.BackLoja.repository.PermissaoPessoaRepository;
 import com.loja.BackLoja.repository.PermissaoRepository;
 

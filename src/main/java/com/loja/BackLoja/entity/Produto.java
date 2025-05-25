@@ -1,13 +1,16 @@
 package com.loja.BackLoja.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -27,17 +30,20 @@ public class Produto {
 	private Double valorVenda;
 	
 	@ManyToOne
-	@JoinColumn(name = "idMarca")
+	@JoinColumn(name = "id_marca")
 	private Marca marca;
 	
 	@ManyToOne
-	@JoinColumn(name = "idCategoria")
+	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAtualizacao;
+	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CarrinhoCompraProduto> itensCarrinho;
 	
 	public Produto()
 	{

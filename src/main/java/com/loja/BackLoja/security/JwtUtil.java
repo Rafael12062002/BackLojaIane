@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.loja.BackLoja.entity.Pessoa;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -42,12 +43,56 @@ public class JwtUtil {
 				.compact();
 	}
 	
+	public String gerarTokenEmail(String email)
+	{
+		return Jwts.builder()
+				.subject(email)
+				.issuedAt(new Date())
+				.expiration(new Date(System.currentTimeMillis() + validadeToken))
+				.signWith(key, Jwts.SIG.HS512)
+				.compact();
+	}
+	
+	public String gerarRefreshToken(Pessoa pessoa)
+	{
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("roles",  pessoa.getAuthorities().stream()
+				.map(GrantedAuthority::getAuthority)
+				.collect(Collectors.toList()));
+		
+		return Jwts.builder()
+				.subject(pessoa.getEmail())
+				.claims(claims)
+				.issuedAt(new Date())
+				.expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
+				.signWith(key, Jwts.SIG.HS512)
+				.compact();
+	}
+	
 	public String getEmailToken(String token)
 	{
 		return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getBody().getSubject();
 	}
 	
 	public boolean validarToken(String token, HttpServletRequest request)
+	{
+		try
+		{
+			Jwts.parser()
+		    .verifyWith(key)
+		    .build()
+		    .parseSignedClaims(token)
+		    .getPayload();
+			return true;
+		}
+		catch(Exception e)
+		{
+			logger.error("Assinatura invalida", e.getMessage());
+		}
+		return false;
+	}
+	
+	public boolean validarToken(String token)
 	{
 		try
 		{

@@ -28,11 +28,11 @@ public class PermissaoPessoa implements GrantedAuthority{
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "idPessoa")
+	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 	
 	@ManyToOne
-	@JoinColumn(name = "idPermissao")
+	@JoinColumn(name = "id_permissao")
 	private Permissao permissao;
 	
 	@Temporal(TemporalType.TIMESTAMP)
